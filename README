@@ -61,12 +61,18 @@ INSTALLATION
         CakePlugin::loadAll(array(
             'Usermgmt' => array('routes' => true),
         ));
-		
-5. Adjust plugin configuration
+5. Add following line in yourapp/app/Config/core.php
+	include_once(ROOT.'/app/Plugin/Usermgmt/Config/config.php');/* for plugin*/
+
+6. Add plugin css in your layout file 
+	for example yourapp/app/View/Layouts/default.ctp
+	echo $this->Html->css('/usermgmt/css/umstyle');
+	
+7. Adjust plugin configuration
 
 	Change /app/Plugin/Usermgmt/Config/config.php (parameters are explained there) to suit your needs.
 
-6. Default user name password 
+8. Default user name password 
 username- admin
 password- 123456
 
