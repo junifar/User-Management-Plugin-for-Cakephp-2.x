@@ -3,7 +3,7 @@
     This file is part of UserMgmt.
 
     Author: Chetan Varshney (http://ektasoftwares.com)
-    
+
     UserMgmt is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -19,12 +19,26 @@
 */
 App::uses('UserMgmtAppModel', 'Usermgmt.Model');
 App::uses('CakeEmail', 'Network/Email');
-class UserGroup extends UserMgmtAppModel
-{
+class UserGroup extends UserMgmtAppModel {
+
+	/**
+	 * This model has following models
+	 *
+	 * @var array
+	 */
 	var $hasMany = array('Usermgmt.UserGroupPermission');
+	/**
+	 * model validation array
+	 *
+	 * @var array
+	 */
 	var $validate = array();
-	function addValidate()
-	{
+	/**
+	 * model validation array
+	 *
+	 * @var array
+	 */
+	function addValidate() {
 		$validate1 = array(
 				'name'=> array(
 					'mustNotEmpty'=>array(
@@ -52,99 +66,95 @@ class UserGroup extends UserMgmtAppModel
 		$this->validate=$validate1;
 		return $this->validates();
 	}
-	/*
-		Function-isUserGroupAccess()
-		Arguments-
-		@controller- controller name 
-		@action- action name 
-		@userGroupID- group id
-		Description- Used to check permissions of group
-	*/
-	function isUserGroupAccess($controller, $action, $userGroupID)
-	{
+	/**
+	 * Used to check permissions of group
+	 *
+	 * @access public
+	 * @param string $controller controller name
+	 * @param string $action action name
+	 * @param integer $userGroupID group id
+	 * @return boolean
+	 */
+	public function isUserGroupAccess($controller, $action, $userGroupID) {
 		$includeGuestPermission=false;
-		if(!PERMISSIONS)
+		if (!PERMISSIONS) {
 			return true;
-		if($userGroupID==ADMIN_GROUP_ID && !ADMIN_PERMISSIONS)
+		}
+		if ($userGroupID==ADMIN_GROUP_ID && !ADMIN_PERMISSIONS) {
 			return true;
-		//if (empty($access) || $access=='/' || substr($access,0,4)=='css/')
-		//	return true;
+		}
 
 		$permissions = $this->getPermissions($userGroupID,$includeGuestPermission);
 		$access =str_replace(' ','',ucwords(str_replace('_',' ',$controller))).'/'.$action;
-		if(in_array($access, $permissions))
-		{
+		if (in_array($access, $permissions)) {
 			return true;
 		}
 		return false;
 	}
-	/*
-		Function-isGuestAccess()
-		Arguments-
-		@controller- controller name 
-		@action- action name 
-		Description- Used to check permissions of guest group
-	*/
-	function isGuestAccess($controller, $action)
-	{
-		if(PERMISSIONS)
+	/**
+	 * Used to check permissions of guest group
+	 *
+	 * @access public
+	 * @param string $controller controller name
+	 * @param string $action action name
+	 * @return boolean
+	 */
+	public function isGuestAccess($controller, $action) {
+		if (PERMISSIONS) {
 			return $this->isUserGroupAccess($controller, $action, GUEST_GROUP_ID);
-		else
+		} else {
 			return true;
+		}
 	}
-	/*
-		Function-getPermissions()
-		Arguments-
-		@userGroupID- group id
-		Description- Used to get permissions from cache or database of a group1
-	*/
-	function getPermissions($userGroupID)
-	{
+	/**
+	 * Used to get permissions from cache or database of a group
+	 *
+	 * @access public
+	 * @param integer $userGroupID group id
+	 * @return array
+	 */
+	public function getPermissions($userGroupID) {
 		$permissions = array();
 		// using the cake cache to store rules
 		$cacheKey = 'rules_for_group_'.$userGroupID;
 		$actions = Cache::read($cacheKey, 'UserMgmt');
-		if ($actions === false) 
-		{
+		if ($actions === false) {
 			$actions = $this->UserGroupPermission->find('all',array('conditions'=>'UserGroupPermission.user_group_id = '.$userGroupID.' AND UserGroupPermission.allowed = 1'));
 			Cache::write($cacheKey, $actions, 'UserMgmt');
 		}
-		foreach ($actions as $action)
-		{
+		foreach ($actions as $action) {
 			$permissions[] = $action['UserGroupPermission']['controller'].'/'.$action['UserGroupPermission']['action'];
 		}
 		return $permissions;
 	}
-	/*
-		Function-getGroupNames()
-		Arguments-
-		Description- Used to get group names
-	*/
-	function getGroupNames()
-	{
+	/**
+	 * Used to get group names
+	 *
+	 * @access public
+	 * @return array
+	 */
+	public function getGroupNames() {
 		$this->unbindModel(array('hasMany' => array('UserGroupPermission')));
 		$result=$this->find("all", array("order"=>"id"));
 		$i=0;
 		$user_groups=array();
-		foreach($result as $row)
-		{
+		foreach ($result as $row) {
 			$user_groups[$i]=$row['UserGroup']['name'];
 			$i++;
 		}
 		return $user_groups;
-	}	
-	/*
-		Function-getGroupNamesAndIds()
-		Arguments-
-		Description- Used to get group names with ids
-	*/
-	function getGroupNamesAndIds()
-	{
+	}
+	/**
+	 * Used to get group names with ids
+	 *
+	 * @access public
+	 * @return array
+	 */
+	public function getGroupNamesAndIds() {
 		$this->unbindModel(array('hasMany' => array('UserGroupPermission')));
 		$result=$this->find("all", array("order"=>"id"));
 		$i=0;
-		foreach($result as $row)
-		{
+		foreach ($result as $row) {
 			$data['id']=$row['UserGroup']['id'];
 			$data['name']=$row['UserGroup']['name'];
 			$user_groups[$i]=$data;
@@ -152,50 +162,48 @@ class UserGroup extends UserMgmtAppModel
 		}
 		return $user_groups;
 	}
-	/*
-		Function-getGroups()
-		Arguments-
-		Description- Used to get group names with ids without guest group
-	*/
-	function getGroups()
-	{
+	/**
+	 * Used to get group names with ids without guest group
+	 *
+	 * @access public
+	 * @return array
+	 */
+	public function getGroups() {
 		$this->unbindModel(array('hasMany' => array('UserGroupPermission')));
 		$result=$this->find("all", array("order"=>"id", "conditions"=>array('name !='=>"Guest")));
 		$user_groups=array();
 		$user_groups[0]='Select';
-		foreach($result as $row)
-		{
+		foreach ($result as $row) {
 			$user_groups[$row['UserGroup']['id']]=$row['UserGroup']['name'];
 		}
 		return $user_groups;
 	}
-	/*
-		Function-getGroupsForRegistration()
-		Arguments-
-		Description- Used to get group names with ids for registration
-	*/
-	function getGroupsForRegistration()
-	{
+	/**
+	 * Used to get group names with ids for registration
+	 *
+	 * @access public
+	 * @return array
+	 */
+	public function getGroupsForRegistration() {
 		$this->unbindModel(array('hasMany' => array('UserGroupPermission')));
 		$result=$this->find("all", array("order"=>"id", "conditions"=>array('allowRegistration'=>1)));
 		$user_groups=array();
 		$user_groups[0]='Select';
-		foreach($result as $row)
-		{
+		foreach ($result as $row) {
 			$user_groups[$row['UserGroup']['id']]=$row['UserGroup']['name'];
 		}
 		return $user_groups;
 	}
-	/*
-		Function-isAllowedForRegistration()
-		Arguments-
-		Description- Used to check group is available for registration
-	*/
-	function isAllowedForRegistration($groupId)
-	{
+	/**
+	 * Used to check group is available for registration
+	 *
+	 * @access public
+	 * @param integer $groupId group id
+	 * @return boolean
+	 */
+	function isAllowedForRegistration($groupId) {
 		$result=$this->findById($groupId);
-		if(!empty($result))
-		{
+		if (!empty($result)) {
 			if($result['UserGroup']['allowRegistration']==1)
 				return true;
 		}

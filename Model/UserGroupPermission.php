@@ -3,7 +3,7 @@
     This file is part of UserMgmt.
 
     Author: Chetan Varshney (http://ektasoftwares.com)
-    
+
     UserMgmt is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -19,7 +19,6 @@
 */
 App::uses('UserMgmtAppModel', 'Usermgmt.Model');
 App::uses('CakeEmail', 'Network/Email');
-class UserGroupPermission extends UserMgmtAppModel
-{
+class UserGroupPermission extends UserMgmtAppModel {
 	 var $belongsTo = array('Usermgmt.UserGroup');
 }

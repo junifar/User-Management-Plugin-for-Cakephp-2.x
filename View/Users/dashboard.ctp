@@ -3,7 +3,7 @@
     This file is part of UserMgmt.
 
     Author: Chetan Varshney (http://ektasoftwares.com)
-    
+
     UserMgmt is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -22,7 +22,7 @@
 	<?php echo $this->Session->flash(); ?>
 	<?php echo $this->element('dashboard'); ?>
 	<div class="um_box_up"></div>
-	<div class="um_box_mid">		
+	<div class="um_box_mid">
 		<div class="um_box_mid_content">
 			<div class="um_box_mid_content_top">
 				<span class="umstyle1"><?php echo __('Dashboard'); ?></span>
@@ -32,10 +32,9 @@
 			<div class="umhr"></div>
 			<div class="um_box_mid_content_mid">
 				<div class="um_box_mid_content_mid_left">
-					Hello <?php echo $user['User']['first_name'].' '.$user['User']['last_name']; ?>
+					Hello <?php echo h($user['User']['first_name']).' '.h($user['User']['last_name']); ?>
 					<br/><br/>
-			<?php	if($this->UserAuth->getGroupName()=='Admin')
-					{ ?>
+			<?php	if ($this->UserAuth->getGroupName()=='Admin') { ?>
 						<span  class="umstyle6"><?php echo $this->Html->link(__("Add User",true),"/addUser") ?></span><br/><br/>
 						<span  class="umstyle6"><?php echo $this->Html->link(__("All Users",true),"/allUsers") ?></span><br/><br/>
 						<span  class="umstyle6"><?php echo $this->Html->link(__("Add Group",true),"/addGroup") ?></span><br/><br/>

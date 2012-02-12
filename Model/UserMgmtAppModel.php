@@ -3,7 +3,7 @@
     This file is part of UserMgmt.
 
     Author: Chetan Varshney (http://ektasoftwares.com)
-    
+
     UserMgmt is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -18,7 +18,6 @@
     along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 */
 App::uses('AppModel', 'Model');
-class UserMgmtAppModel extends AppModel 
-{
+class UserMgmtAppModel extends AppModel {
 
 }

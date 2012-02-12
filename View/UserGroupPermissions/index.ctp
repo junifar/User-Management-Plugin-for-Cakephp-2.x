@@ -1,9 +1,9 @@
-<?php 
+<?php
 /*
     This file is part of UserMgmt.
 
     Author: Chetan Varshney (http://ektasoftwares.com)
-    
+
     UserMgmt is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -23,7 +23,7 @@ echo $this->Html->script('/usermgmt/js/umupdate');
 	<?php echo $this->Session->flash(); ?>
 	<?php echo $this->element('dashboard'); ?>
 	<div class="um_box_up"></div>
-	<div class="um_box_mid">		
+	<div class="um_box_mid">
 		<div class="um_box_mid_content">
 			<div class="um_box_mid_content_top">
 				<div class="umstyle1"  align="left" style="float:left"><?php echo __('User Group Permissions');?></div>
@@ -34,8 +34,7 @@ echo $this->Html->script('/usermgmt/js/umupdate');
 			</div>
 			<div class="umhr"></div>
 			<div class="um_box_mid_content_mid" id="permissions">
-	<?php		if(!empty($controllers))
-				{	?>
+		<?php	if (!empty($controllers)) {	?>
 					<input type="hidden" id="BASE_URL" value="<?php echo SITE_URL?>">
 					<input type="hidden" id="groups" value="<?php echo $groups?>">
 					<table width="100%">
@@ -48,14 +47,10 @@ echo $this->Html->script('/usermgmt/js/umupdate');
 							</tr>
 			<?php
 					$k=1;
-					foreach($controllers as $key=>$value)
-					{
-						if(!empty($value))
-						{
-							for($i=0; $i<count($value); $i++)
-							{
-								if(isset($value[$i]))
-								{
+					foreach ($controllers as $key=>$value) {
+						if (!empty($value)) {
+							for ($i=0; $i<count($value); $i++) {
+								if (isset($value[$i])) {
 									$action=$value[$i];
 									echo $this->Form->create();
 									echo $this->Form->hidden('controller',array('id'=>'controller'.$k,'value'=>$key));
@@ -64,32 +59,27 @@ echo $this->Html->script('/usermgmt/js/umupdate');
 									echo "<td>".$key."</td>";
 									echo "<td>".$action."</td>";
 									echo "<td>";
-									for($j=0; $j<count($user_groups); $j++)
-									{
+									for ($j=0; $j<count($user_groups); $j++) {
 										$ugname=$user_groups[$j];
-										if(isset($value[$action][$ugname]) && $value[$action][$ugname]==1)
+										if (isset($value[$action][$ugname]) && $value[$action][$ugname]==1) {
 											$checked=true;
-										else
+										} else {
 											$checked=false;
+										}
 										echo $this->Form->input($ugname,array('id'=>$ugname.$k,'type'=>'checkbox','checked'=>$checked));
 									}
 									echo "</td>";
 									echo "<td>";
 									echo $this->Form->button('Update', array('type'=>'button','id'=>'mybutton123','name'=>$k,'onClick'=>'javascript:update_fields('.$k.');', 'class'=>'umbtn'));
-									echo "<div id='updateDiv".$k."' align='right'>&nbsp;</div>";		
+									echo "<div id='updateDiv".$k."' align='right'>&nbsp;</div>";
 									echo "</td>";
 									echo "</tr>";
 									echo $this->Form->end();
 									$k++;
 								}
-								else
-								{
-									
-								}							
-							}	
+							}
 						}
-					}
-					?>
+					} ?>
 					</table>
 		<?php	}	?>
 			</div>

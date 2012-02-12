@@ -3,7 +3,7 @@
     This file is part of UserMgmt.
 
     Author: Chetan Varshney (http://ektasoftwares.com)
-    
+
     UserMgmt is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -22,10 +22,10 @@
 	<?php echo $this->Session->flash(); ?>
 	<?php echo $this->element('dashboard'); ?>
 	<div class="um_box_up"></div>
-	<div class="um_box_mid">		
+	<div class="um_box_mid">
 		<div class="um_box_mid_content">
 			<div class="um_box_mid_content_top">
-				<span class="umstyle1"><?php echo __('Change Password for '); echo $name; ?></span>
+				<span class="umstyle1"><?php echo __('Change Password for '); echo h($name); ?></span>
 				<span class="umstyle2" style="float:right"><?php echo $this->Html->link(__("Home",true),"/") ?></span>
 				<div style="clear:both"></div>
 			</div>

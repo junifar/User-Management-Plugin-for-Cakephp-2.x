@@ -2,7 +2,7 @@
     This file is part of UserMgmt.
 
     Author: Chetan Varshney (http://ektasoftwares.com)
-    
+
     UserMgmt is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -16,25 +16,21 @@
     You should have received a copy of the GNU General Public License
     along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 */
-.um_box_mid form
-{
+.um_box_mid form {
 	padding:0 !important;
 	margin:0 !important;
-	width: auto !important;	
+	width: auto !important;
 }
-.um_box_mid form div
-{
+.um_box_mid form div {
 	padding:0;
 	margin:0 ;
 	width: auto ;
 	clear:none;
 }
-.umtop
-{
+.umtop {
 	padding:20px;
 }
-.um_box_up
-{
+.um_box_up {
 	-webkit-border-top-left-radius: 5px;
 	-webkit-border-top-right-radius: 5px;
 	-moz-border-radius-topleft: 5px;
@@ -44,36 +40,29 @@
 	background-color: #E9EAEE;
 	height:10px;
 }
-.um_box_mid
-{
+.um_box_mid {
 	background-color: #E9EAEE;
 	height:auto;
 }
-.um_box_mid_content
-{
-	padding-left:20px; 
+.um_box_mid_content {
+	padding-left:20px;
 	padding-right:20px;
 }
-.um_box_mid_content_top
-{
+.um_box_mid_content_top {
 	text-align:left;
 }
-.um_box_mid_content_mid
-{
+.um_box_mid_content_mid {
 	padding-top:10px;
 }
-.um_box_mid_content_mid_left
-{
+.um_box_mid_content_mid_left {
 	float:left;
 	width:600px;
 }
-.um_box_mid_content_mid_right
-{
+.um_box_mid_content_mid_right {
 	float:left;
 	width:300px;
 }
-.um_box_down
-{
+.um_box_down {
 	-webkit-border-bottom-right-radius: 5px;
 	-webkit-border-bottom-left-radius: 5px;
 	-moz-border-radius-bottomright: 5px;
@@ -83,99 +72,80 @@
 	background-color: #E9EAEE;
 	height:10px;
 }
-.umstyle1
-{
+.umstyle1 {
 	font-size:20px;
 	color:#235A81;
 }
-.umstyle2
-{
+.umstyle2 {
 	font-size:20px;
 	color:#F88017;
 }
-.umstyle2 a
-{
+.umstyle2 a {
 	font-size:20px;
 	color:#F88017;
 }
-.umhr
-{
-	border-bottom:#2485b2 solid 1px; 
+.umhr {
+	border-bottom:#2485b2 solid 1px;
 	height:10px;
 }
-
-.umstyle3
-{
+.umstyle3 {
 	font-size:12px;
 }
-.umstyle4
-{
+.umstyle4 {
 	font-size:12px;
 }
-.umstyle5
-{
+.umstyle5 {
 	border:#999999 solid 1px;
 	font-size: 100%;
 	width: 200px;
 }
-.umstyle6 a
-{
+.umstyle6 a {
 	font-size:16px;
 }
-input[type="submit"]
-{
+input[type="submit"] {
 	cursor:pointer;
 }
-#login .umstyle3
-{
+#login .umstyle3 {
 	float:left;
 	width:150px;
 	padding-bottom:10px;
 }
-#login .umstyle4
-{
+#login .umstyle4 {
 	float:left;
 	width:400px;
 	padding-bottom:10px;
 }
-#register .umstyle3
-{
+#register .umstyle3 {
 	float:left;
 	width:150px;
 	padding-bottom:10px;
 }
-#register .umstyle4
-{
+#register .umstyle4 {
 	float:left;
 	width:400px;
 	padding-bottom:10px;
 }
-#forgot .umstyle3
-{
+#forgot .umstyle3 {
 	float:left;
 	width:200px;
 	padding-bottom:10px;
 }
-#forgot .umstyle4
-{
+#forgot .umstyle4 {
 	float:left;
 	width:400px;
 	padding-bottom:10px;
 }
-#addgroup .umstyle3
-{
+#addgroup .umstyle3 {
 	float:left;
 	width:150px;
 	padding-bottom:10px;
 }
-#addgroup .umstyle4
-{
+#addgroup .umstyle4 {
 	float:left;
 	width:230px;
 	padding-bottom:10px;
 }
-#addgroup .umstyle7
-{
+#addgroup .umstyle7 {
 	float:left;
 	width:auto;
 	padding-bottom:10px;
@@ -216,8 +186,7 @@ input[type="submit"]
   color: #fff;
   text-decoration: none;
 }
-#dashboard
-{
+#dashboard {
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
@@ -226,7 +195,9 @@ input[type="submit"]
 	padding:5px 10px;
 	margin-bottom:5px;
 }
-.icon
-{
-padding-right:5px;
+.icon {
+	padding-right:5px;
+}
+table {
+	margin-bottom:	0px;
 }

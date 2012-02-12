@@ -3,7 +3,7 @@
     This file is part of UserMgmt.
 
     Author: Chetan Varshney (http://ektasoftwares.com)
-    
+
     UserMgmt is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -22,7 +22,7 @@
 	<?php echo $this->Session->flash(); ?>
 	<?php echo $this->element('dashboard'); ?>
 	<div class="um_box_up"></div>
-	<div class="um_box_mid">		
+	<div class="um_box_mid">
 		<div class="um_box_mid_content">
 			<div class="um_box_mid_content_top">
 				<span class="umstyle1"><?php echo __('Add Group'); ?></span>
@@ -45,9 +45,9 @@
 					<div style="clear:both"></div>
 				</div>
 				<div>
-				<?php	if(!isset($this->request->data['UserGroup']['allowRegistration']))
+				<?php	if (!isset($this->request->data['UserGroup']['allowRegistration'])) {
 							$this->request->data['UserGroup']['allowRegistration']=true;
-				?>
+						}	?>
 					<div class="umstyle3"><?php echo __('Allow Registration');?></div>
 					<div class="umstyle4"><?php echo $this->Form->input("allowRegistration" ,array("type"=>"checkbox",'label' => false))?></div>
 					<div style="clear:both"></div>

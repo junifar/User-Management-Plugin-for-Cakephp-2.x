@@ -1,8 +1,6 @@
 UserMgmt is a User Management Plugin for cakephp 2.0.x
 Plugin version 1.0 (beta version)
 
-Hey wanna Demo??? here is http://usermgmt.ektasoftwares.com/
-
 Main Features-
 1. Clean code with formatting
 2. Login
@@ -63,18 +61,12 @@ INSTALLATION
         CakePlugin::loadAll(array(
             'Usermgmt' => array('routes' => true),
         ));
-5. Add following line in yourapp/app/Config/core.php
-	include_once(ROOT.'/app/Plugin/Usermgmt/Config/config.php');/* for plugin*/
-
-6. Add plugin css in your layout file 
-	for example yourapp/app/View/Layouts/default.ctp
-	echo $this->Html->css('/usermgmt/css/umstyle');
-	
-7. Adjust plugin configuration
+		
+5. Adjust plugin configuration
 
 	Change /app/Plugin/Usermgmt/Config/config.php (parameters are explained there) to suit your needs.
 
-8. Default user name password 
+6. Default user name password 
 username- admin
 password- 123456
 

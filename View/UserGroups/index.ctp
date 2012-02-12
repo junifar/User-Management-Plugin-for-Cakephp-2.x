@@ -3,7 +3,7 @@
     This file is part of UserMgmt.
 
     Author: Chetan Varshney (http://ektasoftwares.com)
-    
+
     UserMgmt is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -22,7 +22,7 @@
 	<?php echo $this->Session->flash(); ?>
 	<?php echo $this->element('dashboard'); ?>
 	<div class="um_box_up"></div>
-	<div class="um_box_mid">		
+	<div class="um_box_mid">
 		<div class="um_box_mid_content">
 			<div class="um_box_mid_content_top">
 				<span class="umstyle1"><?php echo __('All Groups'); ?></span>
@@ -43,38 +43,33 @@
 						</tr>
 					</thead>
 					<tbody>
-			<?php		if(!empty($userGroups))
-						{	
-							foreach($userGroups as $row)
-							{ 
+				<?php	if(!empty($userGroups)) {
+							foreach ($userGroups as $row) {
 								echo "<tr>";
 								echo "<td>".$row['UserGroup']['id']."</td>";
-								echo "<td>".$row['UserGroup']['name']."</td>";
-								echo "<td>".$row['UserGroup']['alias_name']."</td>";
+								echo "<td>".h($row['UserGroup']['name'])."</td>";
+								echo "<td>".h($row['UserGroup']['alias_name'])."</td>";
 								echo "<td>";
-								if($row['UserGroup']['allowRegistration'])
+								if ($row['UserGroup']['allowRegistration']) {
 									echo "Yes";
-								else
+								} else {
 									echo "No";
+								}
 								echo"</td>";
 								echo "<td>".date('d-M-Y',strtotime($row['UserGroup']['created']))."</td>";
 								echo "<td>";
 									echo "<span class='icon'><a href='".$this->Html->url('/editGroup/'.$row['UserGroup']['id'])."'><img src='".SITE_URL."usermgmt/img/edit.png' border='0' alt='Edit' title='Edit'></a></span>";
-									if($row['UserGroup']['id']!=1)
-									{
+									if ($row['UserGroup']['id']!=1) {
 										echo $this->Form->postLink($this->Html->image(SITE_URL.'usermgmt/img/delete.png', array("alt" => __('Delete'), "title" => __('Delete'))), array('action' => 'deleteGroup', $row['UserGroup']['id']), array('escape' => false, 'confirm' => __('Are you sure you want to delete this group? Delete it your own risk')));
 									}
-								echo "</td>";								
+								echo "</td>";
 								echo "</tr>";
 							}
-						}
-						else
-						{
+						} else {
 							echo "<tr><td colspan=6><br/><br/>No Data</td></tr>";
-						}
-					?>
+						} ?>
 					</tbody>
-				</table>					
+				</table>
 			</div>
 		</div>
 	</div>

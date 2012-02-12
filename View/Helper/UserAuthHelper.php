@@ -3,7 +3,7 @@
     This file is part of UserMgmt.
 
     Author: Chetan Varshney (http://ektasoftwares.com)
-    
+
     UserMgmt is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -17,33 +17,57 @@
     You should have received a copy of the GNU General Public License
     along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 */
-class UserAuthHelper extends AppHelper
-{
-	var $helpers = array('Session');
+class UserAuthHelper extends AppHelper {
 
-	function isLogged()
-	{
+	/**
+	 * This helper uses following helpers
+	 *
+	 * @var array
+	 */
+	var $helpers = array('Session');
+	/**
+	 * Used to check whether user is logged in or not
+	 *
+	 * @access public
+	 * @return boolean
+	 */
+    public function isLogged() {
         return ($this->getUserId() !== null);
     }
-
-    function getUser()
-	{
+	/**
+	 * Used to get user from session
+	 *
+	 * @access public
+	 * @return array
+	 */
+    public function getUser() {
 		return $this->Session->read('UserAuth');
     }
-
-    function getUserId()
-	{
+	/**
+	 * Used to get user id from session
+	 *
+	 * @access public
+	 * @return integer
+	 */
+    public function getUserId() {
 		return $this->Session->read('UserAuth.User.id');
     }
-
-	function getGroupId()
-	{
+	/**
+	 * Used to get group id from session
+	 *
+	 * @access public
+	 * @return integer
+	 */
+	public function getGroupId() {
 		return $this->Session->read('UserAuth.User.user_group_id');
     }
-
-    function getGroupName()
-	{
+	/**
+	 * Used to get group name from session
+	 *
+	 * @access public
+	 * @return string
+	 */
+    public function getGroupName() {
         return $this->Session->read('UserAuth.UserGroup.alias_name');
     }
-
 }

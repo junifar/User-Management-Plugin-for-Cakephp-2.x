@@ -4,7 +4,7 @@
     This file is part of UserMgmt.
 
     Author: Chetan Varshney (http://ektasoftwares.com)
-    
+
     UserMgmt is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -21,13 +21,32 @@
 App::uses('UserMgmtAppModel', 'Usermgmt.Model');
 App::uses('CakeEmail', 'Network/Email');
 
-class User extends UserMgmtAppModel
-{
+class User extends UserMgmtAppModel {
+	
+	/**
+	 * This model belongs to following models
+	 *
+	 * @var array
+	 */
 	var $belongsTo = array('Usermgmt.UserGroup');
+	/**
+	 * This model has following models
+	 *
+	 * @var array
+	 */
 	var $hasMany = array('LoginToken'=>array('className'=>'Usermgmt.LoginToken','limit' =>1));
+	/**
+	 * model validation array
+	 *
+	 * @var array
+	 */
 	var $validate = array();
-	function LoginValidate()
-	{
+	/**
+	 * model validation array
+	 *
+	 * @var array
+	 */
+	function LoginValidate() {
 		$validate1 = array(
 				'email'=> array(
 					'mustNotEmpty'=>array(
@@ -43,11 +62,15 @@ class User extends UserMgmtAppModel
 		$this->validate=$validate1;
 		return $this->validates();
 	}
-    function RegisterValidate()
-	{
+	/**
+	 * model validation array
+	 *
+	 * @var array
+	 */
+    function RegisterValidate() {
 		$validate1 = array(
 				"user_group_id" => array(
-					'rule' => array('comparison', '!=', 0),				
+					'rule' => array('comparison', '!=', 0),
 					'message'=> 'Please select group'),
 				'username'=> array(
 					'mustNotEmpty'=>array(
@@ -108,13 +131,23 @@ class User extends UserMgmtAppModel
 		$this->validate=$validate1;
 		return $this->validates();
 	}
-	protected function verifies()
-	{
+	/**
+	 * Used to match passwords
+	 *
+	 * @access protected
+	 * @return boolean
+	 */
+	protected function verifies() {
         return ($this->data['User']['password']===$this->data['User']['cpassword']);
-    }	
-
-	function sendRegistrationMail($user)
-	{
+    }
+	/**
+	 * Used to send registration mail to user
+	 *
+	 * @access public
+	 * @param array $user user detail array
+	 * @return void
+	 */
+	public function sendRegistrationMail($user) {
         // send email to newly created user
 		$userId=$user['User']['id'];
 		$email = new CakeEmail();
@@ -127,15 +160,21 @@ class User extends UserMgmtAppModel
 		//$email->transport('Debug');
 		$body="Welcome ".$user['User']['first_name'].", Thank you for your registration on ".SITE_URL." \n\n Thanks,\n".emailFromName;
 		try{
-		$result = $email->send($body);
-		} catch (Exception $ex){
+			$result = $email->send($body);
+		} catch (Exception $ex) {
 			// we could not send the email, ignore it
 			$result="Could not send registration email to userid-".$userId;
 		}
 		$this->log($result, LOG_DEBUG);
     }
-	function sendVerificationMail($user)
-	{
+	/**
+	 * Used to send email verification mail to user
+	 *
+	 * @access public
+	 * @param array $user user detail array
+	 * @return void
+	 */
+	public function sendVerificationMail($user) {
 		$userId=$user['User']['id'];
 		$email = new CakeEmail();
 		$fromConfig = emailFromAddress;
@@ -155,13 +194,25 @@ class User extends UserMgmtAppModel
 		}
 		$this->log($result, LOG_DEBUG);
 	}
-	function getActivationKey($password)
-	{
+	/**
+	 * Used to generate activation key
+	 *
+	 * @access public
+	 * @param string $password user password
+	 * @return hash
+	 */
+	public function getActivationKey($password) {
 		$salt = Configure::read ( "Security.salt" );
 		return md5(md5($password).$salt);
 	}
-	function forgotPassword($user)
-	{
+	/**
+	 * Used to send forgot password mail to user
+	 *
+	 * @access public
+	 * @param array $user user detail
+	 * @return void
+	 */
+	public function forgotPassword($user) {
 		$userId=$user['User']['id'];
 		$email = new CakeEmail();
 		$fromConfig = emailFromAddress;
@@ -172,7 +223,7 @@ class User extends UserMgmtAppModel
 		$email->subject(emailFromName.': Request to Reset Your Password');
 		$activate_key = $this->getActivationKey($user['User']['password']);
 		$link = Router::url("/activatePassword?ident=$userId&activate=$activate_key",true);
-		$body= "Welcome ".$user['User']['first_name'].", let's help you get signed in 
+		$body= "Welcome ".$user['User']['first_name'].", let's help you get signed in
 
 You have requested to have your password reset on ".emailFromName.". Please click the link below to reset your password now :
 
@@ -181,7 +232,7 @@ You have requested to have your password reset on ".emailFromName.". Please clic
 
 If above link does not work please copy and paste the URL link (above) into your browser address bar to get to the Page to reset password
 
-Choose a password you can remember and please keep it secure. 
+Choose a password you can remember and please keep it secure.
 
 Thanks,\n".
 
@@ -194,8 +245,15 @@ emailFromName;
 		}
 		$this->log($result, LOG_DEBUG);
 	}
-	function authsomeLogin($type, $credentials = array())
-	{
+	/**
+	 * Used to mark cookie used
+	 *
+	 * @access public
+	 * @param string $type
+	 * @param string $credentials
+	 * @return array
+	 */
+	public function authsomeLogin($type, $credentials = array()) {
 		switch ($type) {
 			case 'guest':
 				// You can return any non-null value here, if you don't
@@ -230,8 +288,15 @@ emailFromName;
 		}
         return $this->find('first', compact('conditions'));
     }
-	function authsomePersist($userId, $duration)
-	{
+	/**
+	 * Used to generate cookie token
+	 *
+	 * @access public
+	 * @param integer $userId user id
+	 * @param string $duration cookie persist life time
+	 * @return string
+	 */
+	public function authsomePersist($userId, $duration) {
 		$token = md5(uniqid(mt_rand(), true));
 		$this->LoginToken->create(array(
 			'user_id' => $userId,
@@ -242,14 +307,16 @@ emailFromName;
 		$this->LoginToken->save();
 		return "${token}:${userId}";
 	}
-	function getNameById($userId)
-	{
+	/**
+	 * Used to get name by user id
+	 *
+	 * @access public
+	 * @param integer $userId user id
+	 * @return string
+	 */
+	public function getNameById($userId) {
 		$res = $this->findById($userId);
-		$name='';
-		if(!empty($res))
-		{
-			$name=$res['User']['first_name'].' '.$res['User']['last_name'];
-		}
+		$name=(!empty($res)) ? ($res['User']['first_name'].' '.$res['User']['last_name']) : '';
 		return $name;
 	}
 }
