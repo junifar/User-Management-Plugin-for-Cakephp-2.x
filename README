@@ -60,14 +60,10 @@ INSTALLATION
 
         // load Usermgmt plugin and apply plugin routes. Keep all the other plugins you are using here
         CakePlugin::loadAll(array(
-            'Usermgmt' => array('routes' => true),
+            'Usermgmt' => array('routes' => true, 'bootstrap' => true),
         ));
 		
-5. Adjust plugin configuration
-
-	Change /app/Plugin/Usermgmt/Config/config.php (parameters are explained there) to suit your needs.
-
-6. Default user name password 
+5. Default user name password 
 username- admin
 password- 123456
 
