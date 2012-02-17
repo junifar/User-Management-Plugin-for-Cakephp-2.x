@@ -44,7 +44,7 @@ class UsersController extends UserMgmtAppController	{
 	 */
 	public function	index()	{
 		$this->User->unbindModel( array('hasMany' => array('LoginToken')));
-		$users=$this->User->find('all',	array('order'=>'User.id	desc'));
+		$users=$this->User->find('all',	array('order'=>'User.id desc'));
 		$this->set('users',	$users);
 	}
 	/**
