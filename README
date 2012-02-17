@@ -62,8 +62,12 @@ INSTALLATION
         CakePlugin::loadAll(array(
             'Usermgmt' => array('routes' => true, 'bootstrap' => true),
         ));
-		
-5. Default user name password 
+
+5. Add plugin css in your layout file
+    for example yourapp/app/View/Layouts/default.ctp
+    echo $this->Html->css('/usermgmt/css/umstyle');
+
+6. Default user name password 
 username- admin
 password- 123456
 
