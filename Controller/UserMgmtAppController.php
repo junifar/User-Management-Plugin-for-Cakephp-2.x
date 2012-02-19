@@ -18,7 +18,7 @@
 	along with Foobar.	If not,	see	<http://www.gnu.org/licenses/>.
 */
 class UserMgmtAppController	extends	AppController {
-	public $components = array('Session');
+	public $components = array('Session', 'Security');
 
 	public function	beforeFilter() {
 		parent::beforeFilter();

@@ -67,7 +67,11 @@ INSTALLATION
     for example yourapp/app/View/Layouts/default.ctp
     echo $this->Html->css('/usermgmt/css/umstyle');
 
-6. Default user name password 
+6. Adjust plugin configuration
+
+    Change /app/Plugin/Usermgmt/Config/bootstrap.php (parameters are explained there) to suit your needs.
+
+7. Default user name password 
 username- admin
 password- 123456
 

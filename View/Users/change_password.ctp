@@ -20,9 +20,7 @@
 ?>
 <div class="umtop">
 	<?php echo $this->Session->flash();	?>
-	<?php	if ($this->UserAuth->getGroupName()=='Admin') {
-				echo $this->element('dashboard');
-			} ?>
+	<?php echo $this->element('dashboard'); ?>
 	<div class="um_box_up"></div>
 	<div class="um_box_mid">
 		<div class="um_box_mid_content">
